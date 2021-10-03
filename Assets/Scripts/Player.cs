@@ -7,7 +7,9 @@ public class Player : MonoBehaviour
 	private Rigidbody rbPlayer;
 	private Vector3 direction = Vector3.zero;
 	public float speed = 10.0f;
-	public GameObject spawnPoint = null;
+    public float sensitivity = 1;
+
+    public GameObject spawnPoint = null;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,10 +18,24 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        /*
         float horMov = Input.GetAxis("Horizontal");
         float verMov = Input.GetAxis("Vertical");
 
         direction = new Vector3(horMov,0,verMov);
+        */
+
+        float horMov = Input.GetAxis("Horizontal");
+        float verMov = Input.GetAxis("Vertical");
+        if (Mathf.Abs(horMov) >= sensitivity) //sensitivity is a float between 1 and 0
+        {
+            horMov = Mathf.Sign(horMov);
+        }
+        if (Mathf.Abs(verMov) >= sensitivity)
+        {
+            verMov = Mathf.Sign(verMov);
+        }
+        direction = new Vector3(horMov, 0, verMov);
     }
 
     // Update is called once per frame
