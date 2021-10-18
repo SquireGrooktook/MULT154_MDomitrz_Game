@@ -9,7 +9,11 @@ public class Player : MonoBehaviour
     private Vector3 lastDirection = Vector3.zero;
 	public float speed = 10.0f;
     public float sensitivity = 1;
-    public EnemyWaveManager other;
+    public EnemyWaveManager other1;
+    //public EnemyWaveManager other2;
+    //public EnemyWaveManager other3;
+    //public EnemyWaveManager other4;
+    //public List<EnemyWaveManager> other = new List<EnemyWaveManager>();
 
     public int attack_recovery = 0;
     
@@ -150,7 +154,12 @@ public class Player : MonoBehaviour
         {
             Destroy(all_enemies[i]);
         }
-        other.spawnEnemies();
+
+        other1.spawnEnemies();
+        //other2.spawnEnemies();
+        //other3.spawnEnemies();
+        //other4.spawnEnemies();
+
         transform.position = new Vector3(spawnPoint.transform.position.x, spawnPoint.transform.position.y, spawnPoint.transform.position.z);
 
         Score otherA = CanvasKeeper.GetComponent<Score>();
