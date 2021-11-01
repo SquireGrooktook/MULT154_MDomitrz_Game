@@ -6,7 +6,7 @@ public class Player : MonoBehaviour
 {
 	private Rigidbody rbPlayer;
 	private Vector3 direction = Vector3.zero;
-    private Vector3 lastDirection = Vector3.zero;
+    public Vector3 lastDirection = Vector3.zero;
 	public float speed = 10.0f;
     public float sensitivity = 1;
     public EnemyWaveManager other1;
@@ -16,41 +16,39 @@ public class Player : MonoBehaviour
     //public List<EnemyWaveManager> other = new List<EnemyWaveManager>();
 
     public int attack_recovery = 0;
+    private int death_timer = 0;
     
 
     public GameObject projectile;
     public GameObject spawnPoint = null;
     public GameObject CanvasKeeper;
+    //public GameObject model;
 
     private int input = 0;
     private bool slashTrigger;
 
     private GameObject newProjectile;
+
+    //new
+
+    private Animator anim;
     // Start is called before the first frame update
     void Start()
     {
         //lastDirection = new Vector3()
         rbPlayer = GetComponent<Rigidbody>();
         CanvasKeeper = GameObject.Find("Canvas");
+        anim = GetComponentInChildren<Animator>();
+        //model = GameObject.Find("BasicMotionsDummyModel");
     }
 
     void Update()
     {
-        /*
-        float horMov = Input.GetAxisRaw("Horizontal");
-        float verMov = Input.GetAxisRaw("Vertical");
-        direction = new Vector3(horMov, 0, verMov);
 
-        if (Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0)
-        {
-            lastDirection = direction;
-        }
-
-        //direction = new Vector3(horMov,0,verMov);
-        */
 
         float horMov = Input.GetAxisRaw("Horizontal");
         float verMov = Input.GetAxisRaw("Vertical");
+        anim.SetFloat("speed", 1);
         if (Mathf.Abs(horMov) >= 1) //sensitivity is a float between 1 and 0
         {
             horMov = Mathf.Sign(horMov);
@@ -65,6 +63,10 @@ public class Player : MonoBehaviour
         {
             lastDirection = direction;
         }
+        else
+        {
+            anim.SetFloat("speed", 0);
+        }
 
         //
 
@@ -78,41 +80,58 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (attack_recovery > 0)
+        if (death_timer > 0)
         {
-            attack_recovery--;
+            death_timer--;
+
+            if (death_timer == 1)
+            {
+                Respawn();
+            }
         }
         else
         {
 
-            transform.Translate(direction * speed);
 
-            if (transform.position.z > 11f)
+            if (attack_recovery > 0)
             {
-                transform.position = new Vector3(transform.position.x, transform.position.y, 11f);
+                attack_recovery--;
             }
-            else if (transform.position.z < -11.89f)
+            else
             {
-                transform.position = new Vector3(transform.position.x, transform.position.y, -11.89f);
-            }
 
-            if (transform.position.x > 12f)
-            {
-                transform.position = new Vector3(12f, transform.position.y, transform.position.z);
-            }
-            else if (transform.position.x < -12f)
-            {
-                transform.position = new Vector3(-12f, transform.position.y, transform.position.z);
-            }
+                transform.Translate(direction * speed);
+                //transform.rotation = Quaternion.LookRotation(direction);
+                //anim.SetFloat("speed",Translation);
+                //transform.GetChild(BasicMotionsDummyModel).GetComponent<TheComponent>().theVariable = theValue;
 
-            //
+                if (transform.position.z > 11f)
+                {
+                    transform.position = new Vector3(transform.position.x, transform.position.y, 11f);
+                }
+                else if (transform.position.z < -11.89f)
+                {
+                    transform.position = new Vector3(transform.position.x, transform.position.y, -11.89f);
+                }
 
-            if (slashTrigger == true)
-            {
-                newProjectile = Instantiate(projectile, transform.position, transform.rotation); //as GameObject;
-                newProjectile.transform.Translate(lastDirection * 2f);
-                Destroy(newProjectile, .1f);
-                attack_recovery = 10;
+                if (transform.position.x > 12f)
+                {
+                    transform.position = new Vector3(12f, transform.position.y, transform.position.z);
+                }
+                else if (transform.position.x < -12f)
+                {
+                    transform.position = new Vector3(-12f, transform.position.y, transform.position.z);
+                }
+
+                //
+
+                if (slashTrigger == true)
+                {
+                    newProjectile = Instantiate(projectile, transform.position, transform.rotation); //as GameObject;
+                    newProjectile.transform.Translate(lastDirection * 2f);
+                    Destroy(newProjectile, .1f);
+                    attack_recovery = 10;
+                }
             }
         }
     }
@@ -140,7 +159,11 @@ public class Player : MonoBehaviour
     {
         if (other.CompareTag("Hazard"))
         {
-            Respawn();
+            if (death_timer == 0)
+            {
+                death_timer = 60;
+            }
+            //Respawn();
         }
     }
     
@@ -148,6 +171,7 @@ public class Player : MonoBehaviour
 
     private void Respawn()
     {
+        death_timer = 0;
         GameObject[] all_enemies = GameObject.FindGameObjectsWithTag("Hazard");
 
         for (var i = 0; i < all_enemies.Length; i++)

@@ -1028,6 +1028,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9500000, guid: 5917c0e93d180a842b61d1ebc62a195c, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 558366858a41f4e40a9cd036e32ade8a, type: 2}
+    - target: {fileID: 9500000, guid: 5917c0e93d180a842b61d1ebc62a195c, type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5917c0e93d180a842b61d1ebc62a195c, type: 3}
 --- !u!1 &1170657612
@@ -1234,6 +1242,23 @@ MonoBehaviour:
   SpawnPoint3: {fileID: 1998597638}
   SpawnPoint4: {fileID: 14286229}
   EnemyType: {fileID: 1418673026445935255, guid: a6c2e4abb25fff8489bbb456aa89021c, type: 3}
+--- !u!1 &1561108997 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100120, guid: 5917c0e93d180a842b61d1ebc62a195c, type: 3}
+  m_PrefabInstance: {fileID: 1004249048}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1561109000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1561108997}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f3c754c654c5b541877ca5a1b3fdd15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1687258581
 GameObject:
   m_ObjectHideFlags: 0
@@ -1970,6 +1995,26 @@ PrefabInstance:
     - target: {fileID: 2932687839257765912, guid: db8fbc44ca6568348ac85b6ae8306e6a, type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2932687839257765913, guid: db8fbc44ca6568348ac85b6ae8306e6a, type: 3}
+      propertyPath: m_Height
+      value: 1.8990325
+      objectReference: {fileID: 0}
+    - target: {fileID: 2932687839257765913, guid: db8fbc44ca6568348ac85b6ae8306e6a, type: 3}
+      propertyPath: m_Radius
+      value: 0.108091615
+      objectReference: {fileID: 0}
+    - target: {fileID: 2932687839257765913, guid: db8fbc44ca6568348ac85b6ae8306e6a, type: 3}
+      propertyPath: m_Center.x
+      value: -0.016263112
+      objectReference: {fileID: 0}
+    - target: {fileID: 2932687839257765913, guid: db8fbc44ca6568348ac85b6ae8306e6a, type: 3}
+      propertyPath: m_Center.y
+      value: 0.94107896
+      objectReference: {fileID: 0}
+    - target: {fileID: 2932687839257765913, guid: db8fbc44ca6568348ac85b6ae8306e6a, type: 3}
+      propertyPath: m_Center.z
+      value: -0.050235517
       objectReference: {fileID: 0}
     - target: {fileID: 2932687839257765915, guid: db8fbc44ca6568348ac85b6ae8306e6a, type: 3}
       propertyPath: m_Name
