@@ -23,6 +23,7 @@ public class ScoreList : MonoBehaviour
     public string fileName;
     public int scoreTransfer = 0;
     public GameObject input;
+    GameManager Game_Manager;
 
     public GameObject finalPanel;
     public GameObject scorePanel;
@@ -31,6 +32,9 @@ public class ScoreList : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Game_Manager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        int score_x = Game_Manager.score; //this is where it needs to go
+        //DontDestroyOnLoad(gameObject);
         if (File.Exists(fileName))
         {
             using (BinaryReader reader = new BinaryReader(File.Open(fileName, FileMode.Open)))
@@ -39,12 +43,12 @@ public class ScoreList : MonoBehaviour
                 {
                     try
                     {
-                        /*
+                        
                         string name = reader.ReadString();
 
                         int score = (int)reader.ReadSingle();
                         scores.Add(new Score(name, score));
-                        */
+                        
                     }
                     catch (EndOfStreamException e)
                     {
@@ -60,11 +64,13 @@ public class ScoreList : MonoBehaviour
     public void NewEntry()
     {
         string name = input.GetComponent<TMP_InputField>().text;
-        int score = scoreTransfer; //this is where it needs to go
+        Game_Manager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        //scoreTransfer = Game_Manager.score;
+        int score_x = Game_Manager.score; //this is where it needs to go
 
-        scores.Add(new Score(name, score));
+        scores.Add(new Score(name, score_x));
 
-        scores.Insert(0, new Score(name, score));
+        scores.Insert(0, new Score(name, score_x));
         int offset = 0;
         foreach (Score score2 in scores)
         {
@@ -94,7 +100,8 @@ public class ScoreList : MonoBehaviour
             foreach (Score score2 in scores)
             {
                 write.Write(score2.name);
-                write.Write(score2.score);
+                write.Write((float)score2.score);
+                //Debug.Log("why " + score2.score)
             }
         }
     }

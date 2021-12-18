@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
 
     public GameManager Game_Manager;
 
-    private int score = 0;
+    public int score = 0;
 
     bool initializeScene = false;
     string sceneName;
@@ -92,6 +92,7 @@ public class GameManager : MonoBehaviour
                     {
                         _scoreText.text = "";
 
+                        audioSource.Stop();
                         //Initialization complete
                         initializeScene = true;
                     }
