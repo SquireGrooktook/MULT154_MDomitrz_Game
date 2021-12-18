@@ -34,16 +34,10 @@ public class EnemyWaveManager : MonoBehaviour
 
     public void spawnEnemies()
     {
-        //int move_amount = 10;
-        //GameObject[] EnemySpawns = new GameObject[4];
-        //EnemySpawns.Add(Instantiate(EnemyType, new Vector3(transform.position.x, transform.position.y, transform.position.z), transform.rotation) as GameObject);
         Instantiate(EnemyType, SpawnPoint1.transform.position, SpawnPoint1.transform.rotation);
         Instantiate(EnemyType, SpawnPoint2.transform.position, SpawnPoint2.transform.rotation);
         Instantiate(EnemyType, SpawnPoint3.transform.position, SpawnPoint3.transform.rotation);
         Instantiate(EnemyType, SpawnPoint4.transform.position, SpawnPoint4.transform.rotation);
-        //EnemySpawns.Add(Instantiate(EnemyType, new Vector3(transform.position.x + move_amount, transform.position.y, transform.position.z - move_amount), transform.rotation) as GameObject);
-        //EnemySpawns.Add(Instantiate(EnemyType, new Vector3(transform.position.x - move_amount, transform.position.y, transform.position.z + move_amount), transform.rotation) as GameObject);
-        //EnemySpawns.Add(Instantiate(EnemyType, new Vector3(transform.position.x - move_amount, transform.position.y, transform.position.z - move_amount), transform.rotation) as GameObject);
     }
 
 }

@@ -7,9 +7,9 @@ public class Player : MonoBehaviour
 	private Rigidbody rbPlayer;
 	private Vector3 direction = Vector3.zero;
     public Vector3 lastDirection = Vector3.zero;
-	public float speed = 10.0f;
+    public float speed = 0.25f;
     public float sensitivity = 1;
-    public EnemyWaveManager other1;
+    //public EnemyWaveManager other1;
     //public EnemyWaveManager other2;
     //public EnemyWaveManager other3;
     //public EnemyWaveManager other4;
@@ -20,8 +20,10 @@ public class Player : MonoBehaviour
     
 
     public GameObject projectile;
-    public GameObject spawnPoint = null;
-    public GameObject CanvasKeeper;
+    //public GameObject spawnPoint = null;
+    //public GameObject CanvasKeeper;
+
+    public GameManager Game_Manager;
     //public GameObject model;
 
     private int input = 0;
@@ -37,7 +39,7 @@ public class Player : MonoBehaviour
     {
         //lastDirection = new Vector3()
         rbPlayer = GetComponent<Rigidbody>();
-        CanvasKeeper = GameObject.Find("Canvas");
+        //CanvasKeeper = GameObject.Find("Canvas");
         anim = GetComponentInChildren<Animator>();
         //model = GameObject.Find("BasicMotionsDummyModel");
     }
@@ -86,7 +88,8 @@ public class Player : MonoBehaviour
 
             if (death_timer == 1)
             {
-                Respawn();
+                //Respawn();
+                Game_Manager.SceneTransition("EndScene");
             }
         }
         else
@@ -135,25 +138,7 @@ public class Player : MonoBehaviour
             }
         }
     }
-
-    /*
-    private void OnTriggerExit(Collider other)
-    {
-    	if (other.CompareTag("Hazard"))
-    	{
-    		Respawn();
-    	}
-    }
-
-    void onCollisionEnter(Collision col)
-    {
-        // When target is hit
-        if (col.gameObject.tag == "Hazard")
-        {
-            Respawn();
-        }
-    }
-    */
+    
     
     private void OnTriggerEnter(Collider other)
     {
@@ -166,9 +151,9 @@ public class Player : MonoBehaviour
             //Respawn();
         }
     }
-    
 
 
+    /*
     private void Respawn()
     {
         death_timer = 0;
@@ -189,4 +174,5 @@ public class Player : MonoBehaviour
         Score otherA = CanvasKeeper.GetComponent<Score>();
         otherA.clearScore();
     }
+    */
 }
